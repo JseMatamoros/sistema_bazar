@@ -1,0 +1,27 @@
+{% extends 'vendedor/base.html' %}
+{% block encabezado %} Generar Documento {% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center">Seleccionar Tipo de Documento Tributario</h3>
+    
+    <form id="documentotributario-form" method="post">
+        {% csrf_token %}
+        <label for="monto_pagado" class="form-control mb-4">Monto Pagado</label>
+        <input type="number" class="form-control mb-4" name="monto_pagado" id="monto_pagado">
+        <label  for="tipo_documento">Selecciona el tipo de documento:</label>
+        <select class="form-control mb-4" name="tipo_documento" id="tipo_documento">
+            <option value="4">Boleta</option>
+            <option value="5">Factura</option>
+        </select>
+        <button class="btn btn-secondary" type="submit">Generar Documento</button>
+    </form>
+    
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script><!-- Libreria para añadir JQuery al proyecto. -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script><!-- Libreria para utilizar sweet alert. -->
+
+{% endblock %}

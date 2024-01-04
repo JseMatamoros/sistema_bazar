@@ -1,0 +1,15 @@
+{% extends 'jefeVentas/base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">Formulario Edición Productos</h2>
+    <form method="post" class="col-lg-7 mx-auto">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="d-grid gap-2">
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <a href="{% url 'pagina_inventario' %}" class="btn btn-secondary">Volver</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

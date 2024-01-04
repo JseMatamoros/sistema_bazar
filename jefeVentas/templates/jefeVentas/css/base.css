@@ -1,0 +1,32 @@
+#content {
+    background-color: black;
+}
+
+/* body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+} */
+footer {
+    position: absolute;
+    bottom: 0px; /* Ajusta según la distancia que desees del borde inferior */
+    left: 0;
+    right: 0;
+    height: 350px; /* Ajusta según la altura que desees para tu Footer */
+    background-color: #343a40; /* Color de fondo del Footer */
+    color: #ffffff; /* Color del texto */
+    margin: 0px;
+    padding: 20px; /* Añade espacio interno al contenido del Footer */
+    text-align: center; /* Centra el contenido del Footer */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Añade una sombra al Footer */
+    font-size: 20px;
+    z-index: 4;
+}
+
+
+
+
+
+
+
+

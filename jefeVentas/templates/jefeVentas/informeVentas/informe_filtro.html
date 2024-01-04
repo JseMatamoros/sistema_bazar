@@ -1,0 +1,45 @@
+
+
+
+<div class="card mb-2">
+    <div class="card-body">
+        <h5 class="card-title">Filtro Informe Ventas</h5>
+        <form method="get" action="{% url 'informe_diario' %}">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label for="vendedor" class="form-label">Vendedor</label>
+                    <select id="vendedor" name="vendedor" class="form-select">
+                        <option value="">- Todos -</option>
+                        {% for vendedor in vendedores %}
+                            <option value="{{ vendedor.id }}">{{ vendedor.name }} {{ vendedor.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="tipo_documento" class="form-label">Tipo De Documento</label>
+                    <select id="tipo_documento" name="tipo_documento" class="form-select">
+                        <option value="">- Todos -</option>
+                        {% for tipo in tipos_documento %}
+                            <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <label for="fecha_inicio" class="form-label">Rango inicio (*)</label>
+                    <input type="date" id="fecha_inicio" name="fecha_inicio" class="">
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="fecha_fin" class="form-label">Rango termino (*)</label>
+                    <input type="date" id="fecha_fin" name="fecha_fin" class="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary">Generar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

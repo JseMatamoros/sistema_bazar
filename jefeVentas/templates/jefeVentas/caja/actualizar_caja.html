@@ -1,0 +1,15 @@
+{% extends 'jefeVentas/base.html' %}
+
+
+{% block content %}
+
+<h2>{% if caja.estado.nombre == 'Abierto' %}¿Está seguro de cerrar la caja?{% else %}¿Está seguro de abrir la caja?{% endif %}</h2>
+<form method="post" class="col-7 mx-auto">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button class="btn btn-danger"  type="submit" >{% if caja.estado.nombre == 'Abierto' %}Cerrar{% else %}Abrir{% endif %}
+    </button>
+    <a href="{% url 'pagina_caja' %}" class="btn btn-secondary">Volver</a>
+</form>
+
+{% endblock %}

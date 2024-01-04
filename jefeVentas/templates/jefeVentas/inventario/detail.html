@@ -1,0 +1,44 @@
+{% extends 'jefeVentas/base.html' %}
+{% load static %}
+{% block content %}
+  {% if productos %}
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Detalle de Producto</h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <dl class="row">
+                <dt class="col-sm-3"><b>ID:</b></dt>
+                <dd class="col-sm-9">{{ productos.id }}</dd>
+
+                <dt class="col-sm-3"><b>Nombre:</b></dt>
+                <dd class="col-sm-9">{{ productos.nombre }}</dd>
+
+                <dt class="col-sm-3"><b>Precio:</b></dt>
+                <dd class="col-sm-9">{{ productos.precio }}</dd>
+
+                <dt class="col-sm-3"><b>Descripción:</b></dt>
+                <dd class="col-sm-9">{{ productos.descripcion }}</dd>
+
+                <dt class="col-sm-3"><b>Stock:</b></dt>
+                <dd class="col-sm-9">{{ productos.stock }}</dd>
+
+                <dt class="col-sm-3"><b>Categoría:</b></dt>
+                <dd class="col-sm-9">{{ productos.categoria }}</dd>
+              </dl>
+            </div>
+            <div class="col-md-6 text-center">
+              <img src="{{ productos.imagen.url }}" alt="Foto de {{ producto.nombre }}" width="200px">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="d-grid gap-2 mt-3">
+    <a href="{% url 'pagina_inventario' %}" class="btn btn-secondary">Volver</a>
+  </div>
+{% endblock %}

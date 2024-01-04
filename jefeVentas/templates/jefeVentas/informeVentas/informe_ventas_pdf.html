@@ -1,0 +1,202 @@
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura Electrónica</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 10px;
+        }
+        .header {
+            position: relative;
+            display: flex; /* Usa Flexbox para la disposición */
+            align-items: center; /* Alinea los elementos verticalmente en el centro */
+            justify-content: start; /* Alinea los elementos al inicio del contenedor */
+            padding: 20px; /* Espaciado alrededor del contenido */
+        }
+
+        .provider-info {
+            margin-left: 20px; /* Espaciado entre el logo y la información de la empresa */
+            /* No necesitas flex-grow aquí si quieres que tome el ancho del contenido */
+            
+        }
+        .header-logo {
+            /* Elimina el float y ajusta el tamaño como sea necesario */
+            flex-basis: 150px; /* Asumiendo que el logo tiene un ancho fijo */
+        }
+        .header-info {
+            text-align: right;
+            width: 79%;
+            float: right;
+        }
+        .red-box-container {
+            position: absolute;
+            padding: 5px;
+            border: 2px solid red;
+            background-color: white;
+            box-sizing: border-box;
+            top: 20px;
+            right: 10px;
+            display: inline-block; /* El contenedor se ajusta al contenido */
+        }
+        .red-box {
+            display: block; /* Cada .red-box se muestra en su propia línea */
+            color: red;
+            font-weight: bold;
+            text-align: right;
+        }
+        .provider-info p {
+            margin: 0; /* Elimina los márgenes por defecto */
+            padding: 0; /* Elimina los paddings por defecto */
+            line-height: 1.2; /* Ajusta la altura de línea a tu gusto */
+            /* Puedes también ajustar el margen inferior si quieres un poco de espacio entre los párrafos */
+            margin-bottom: 2px; /* Añade un pequeño espacio entre los párrafos */
+            
+        }
+        .client-info {
+            margin-top: 10px; /* Añade un margen superior a la primera tabla para separarla del div que precede */
+        }
+        .clear { clear: both; }
+        .details {
+            
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details th, .details td {
+            border: 1px solid #ddd;
+            padding: 2px;
+            text-align: left;
+        }
+        .details th {
+            background-color: #f2f2f2;
+        }
+        .totals {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: auto; /* Ancho automático basado en el contenido de las celdas */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .totals td {
+            border: 1px solid #ddd;
+            padding: 2px 5px; /* Ajusta el padding si es necesario */
+            text-align: right; /* Alineación predeterminada a la izquierda */
+        }
+        .totals td:last-child {
+            text-align: right; /* Alinea los números a la derecha */
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 8px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        
+        </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-logo">
+            <img src="media/product_img/logo.jpg" alt="Logo" style="height: 150px; width: 200px;">
+        </div>
+        <div class="red-box-container">
+            <div class="red-box">RUT: 96.470.430-K</div>
+            <div class="red-box">FACTURA ELECTRÓNICA N° {{ documento.venta.id }}</div>
+        </div>
+        <div class="provider-info">
+            <p>Los Monitos de la Nona S.A.</p>
+            <p>Artículos escolares, Alimentos y Productos de Bazar</p>
+            <p>Hernando de Aguirre 162</p>
+            <p>Oficina 203, Providencia, Santiago</p>
+            <p>Fono (02) 2234 9901</p>
+            <p>www.LosMonitos.cl</p>
+            <p> </p>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    
+    <table class="client-info">
+        <tr>
+            <td>Cliente</td>
+            <td>{{ documento.cliente.nombre }} {{ documento.cliente.apellido }}</td>
+            <td></td>
+            <td>Emisión: {{ documento.fecha }}</td>
+        </tr>
+        <tr>
+            <td>R.U.T.: </td>
+            <td>{{ documento.cliente.rut }}</td>
+            <td></td>
+            <td>Pago: Efectivo</td>
+        </tr>
+        <tr>
+            <td>Giro: </td>
+            <td>{{ documento.cliente.giro }}</td>
+            <td></td>
+            <td>Vendedor: {{documento.vendedor.name}} {{documento.vendedor.last_name}}</td>
+        </tr>
+        <tr>
+            <td>Dirección: </td>
+            <td>{{ documento.cliente.direccion }}</td>
+            
+        </tr>
+        
+    </table>
+
+    <table class="details">
+        <thead>
+            <tr>
+                <th>Sku</th>
+                <th>Categoria</th>
+                <th>Detalle</th>
+                <th>Cantidad</th>
+                <th>P. Unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in documento.detalleCompra.all %}
+            <tr>
+                <td>{{ detalle.producto.sku }}</td>
+                <td>{{ detalle.producto.categoria }}</td>
+                <td>{{ detalle.producto.nombre }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.precio }}</td>
+                {% if forloop.first %} <!-- Solo en la primera fila -->
+                <td rowspan="{{ documento.detalleCompra.all|length }}"> <!-- Asegúrate de que el rowspan sea igual al número de detalles -->
+                    {{ documento.subtotal }} <!-- Muestra el total del documento -->
+                </td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <table class="totals">
+        <tr>
+            <td></td>
+            <td>Subtotal: {{ documento.subtotal }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>IVA: {{ documento.iva }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Total: {{ documento.precio_total }}</td>
+        </tr>
+    </table>
+    
+    <div class="footer">
+        <img src="media/product_img/TimbreElectronico.jpg" alt="Logo" style="height: 100px; width: 200px;">
+        <p>Timbre Electrónico SII Res. 80 de 2023</p>
+        <p>Verifique este documento: www.sii.cl</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<main class="d-flex align-items-center bg-dark text-center">
+    <div class="container mx-auto text-center " style="color: white">
+        
+        
+        <h4><i class="bi bi-person-bounding-box"></i> ¿Acabas de crear un usuario?</h4>
+        <h6><i class="bi bi-person-workspace"></i> ¿Quieres trabajar con nosotros?</h6>
+    
+        <p>
+            Comunícate inmediatamente con el encargado de la tienda; él te dará más indicaciones para que te integres a Los Monitos de La Nona.
+        </p>
+        <p>
+            Mientras tanto, vuelve al <a href="{% url 'login' %}">Inicio</a>.
+        </p>
+        
+        <!-- Agrega más contenido aquí según tus necesidades -->
+        {% load static %}
+        <a href="{% url 'login' %}"><img src="{% static 'img/mant.jfif' %}" alt=""></a>
+        <p>¡Bienvenido a nuestro equipo!</p>
+    </div>
+</main>
+{% endblock %}

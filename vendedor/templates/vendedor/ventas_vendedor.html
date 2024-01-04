@@ -1,0 +1,27 @@
+<div class="col-md-12 mb-0">
+    <div class="card h-100">
+        <div class="card-body" style="max-height: 550px; overflow-y: auto;">
+            <h5 class="card-title">Ventas Recientes</h5>
+            <table class="table table-bordered mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Vendedor</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Iva</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas_vendedor_caja %}
+                    <tr>
+                        <td>{{ venta.vendedor }}</td>
+                        <td class="cantidad">{{ venta.subtotal }}</td>
+                        <td class="iva">$ {{ venta.iva }}</td>
+                        <td class="total">$ {{ venta.precio_total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

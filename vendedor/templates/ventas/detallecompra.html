@@ -1,0 +1,25 @@
+<div class="col-md-6 mb-0">
+    <div class="card h-100">
+        <div class="card-body" style="max-height: 200px; overflow-y: auto;">
+            <h5 class="card-title">Compra Actual</h5>
+            <table class="table table-bordered mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre del producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detalle in detalle_compra %}
+                    <tr>
+                        <td>{{ detalle.producto }}</td>
+                        <td class="cantidad">{{ detalle.cantidad }}</td>
+                        <td class="precio">$ {{ detalle.precio }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

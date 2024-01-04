@@ -1,0 +1,53 @@
+{% extends 'vendedor/base.html' %}
+{% block encabezado %} Items de la venta actual{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Seleccionar productos para la venta</h5>
+                <form method="POST" class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Seleccionar</button>
+                    <a href="{% url 'ventas3' %}" class="btn btn-success">Finalizar</a>
+                    <a href="{% url 'vendedor' %}" class="btn btn-secondary">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        {% include 'ventas/detallecompra.html' %}
+
+        <div class="col-md-6 mb-0">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Resumen del Pedido</h5>
+                    <table class="table table-bordered mb-0">
+                        <tbody>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td id="subtotal"></td>
+                            </tr>
+                            <tr>
+                                <td>IVA</td>
+                                <td id="iva"></td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td id="total"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendedor/styles.css' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    <title>Panel de ventas</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row p-3">
+            <div class="col-md-6">
+                <h5 class="mb-0 mt-2 text-center"><i class="bi bi-check2-circle"></i> {% block encabezado %}{% endblock %} </h5>
+            </div>
+            <div class="col-md-6 text-end">
+                <i class="bi bi-person-bounding-box"></i>
+                {% if user.is_authenticated %}
+                    {% if user.vendedor %}
+                        <span class="fw-bold me-3">{{ user.vendedor.name }}</span>
+                    {% else %}
+                        <!-- Si no hay perfil de Vendedor asociado, muestra el nombre de usuario o algo más -->
+                        <span class="fw-bold me-3">{{ user.username }}</span>
+                    {% endif %}
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>Logout</a>
+                {% else %}
+                    <a class="nav-link me-2" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i>Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div>
+        <!--Contenido dinamico-->
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{% static 'vendedor/scripts.js' %}"></script>
+</body>
+
+</html>

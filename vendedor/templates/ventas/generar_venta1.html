@@ -1,0 +1,40 @@
+{% extends 'vendedor/base.html' %}
+{% block encabezado %}Panel de clientes{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h5 class="mb-4 text-center">RECUERDA NUESTRO SCRIPT DE ATENCIÓN</h5>
+    <div class="row">
+        <div class="col-5 mx-auto">
+            <!-- Primer recuadro -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Muy buenos días, ¿ya es cliente de la tienda?</h5>
+                    <p class="card-text">¿Le gustaria registrarse como cliente?</p>
+                </div>
+            </div>
+            <!-- Segundo recuadro -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">El proceso de inscripción es rápido!</h5>
+                    <p class="card-text">Ahora puedes informar acerca de los descuentos, ofertas y promociones en caso de registrarse como cliente.</p>
+                </div>
+            </div>
+            <!-- Tercer recuadro -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Si el cliente no quiere, no le incistas!</h5>
+                    <p class="card-text">Selecciona el usuario Random para generar una venta sin usuario.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" class="col-7 mx-auto">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button class="btn btn-success"  type="submit" >Siguiente </button>
+        <a href="{% url 'vendedor' %}" class="btn btn-secondary">Volver</a>
+        <a href="{% url 'registrar_cliente' %}" class="btn btn-primary">Registrar cliente</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+* {
+    background-color: black;
+    color: white;
+}
+.custom-container {
+    background-color: black;
+}
+.custom-container .col-md-4 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.custom-container .col-md-4 .input-group-text {
+    background-color: black !important;
+    border: none;
+    color: white;
+
+}
+.custom-container .col-md-4 input {
+    background-color: #ffffff !important;
+    border: none;
+    color: #000000;
+    
+}
+#principal {
+    max-height: 650px; 
+    height: 650px; 
+    overflow: hidden;
+}
+#azul {
+    background-color: black; 
+    height: 380px; 
+    max-height: 350px; 
+    overflow-y: auto;
+}
+#rojo {
+    background-color: black; 
+    height: 180px; 
+    max-height: 180px; 
+    padding-left: 40%; 
+    color: white;
+}
+#verde {
+    background-color: black;
+    width: 100%;
+    max-width: none;
+    margin-right: 0;
+}
+
+#menu-superior {
+    display: flex; 
+    justify-content: space-between; 
+    gap: 5px; 
+    align-items: center;
+}
+#menu-inferior {
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 315px;
+}
+
+/* encabezado */
+
+.header-border {
+    border-bottom: 2px solid white;
+}
+
+/* efectos dashboard */
+
+/* box dash */
+.box.card.active {
+    background-color: #ff0000;
+}
+
+
+/* cards */
+
+/* Agrega sombra al pasar el mouse */
+/* .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+} */
+
+/* Cambia el fondo al hacer clic */
+/* .card:active {
+    background-color: #f8f9fa;
+} */

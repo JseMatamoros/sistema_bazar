@@ -1,0 +1,66 @@
+{% extends 'vendedor/base.html' %}
+{% block encabezado %}Registrar Nuevo Cliente{% endblock %}
+
+
+{% block content %}
+<div  class="container">
+    <div class="card col-7 mx-auto mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">
+                Ingrese todos los datos del cliente!
+            </h5>
+            <form id="cliente-form" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">
+                            <i class="{{ field.field.widget.attrs.icon }}"></i> {{ field.field.widget.attrs.label }}
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Registrar Cliente</button>
+                <a href="{% url 'ventas1' %}" class="btn btn-secondary">Volver</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script><!-- Libreria para añadir JQuery al proyecto. -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script><!-- Libreria para utilizar sweet alert. -->
+<script>
+    // Este script manejará el envío del formulario de manera asíncrona usando AJAX.
+    document.getElementById("cliente-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional.
+
+        // Hace una petición AJAX al servidor enviando los datos del formulario serializados.
+        $.ajax({
+            url: "{% url 'registrar_cliente' %}", // URL a la que se enviará la petición.
+            type: "post", // Método HTTP a usar.
+            data: $(this).serialize(), // Agrega el token CSRF a los datos.
+
+            success: function (data) { // Función a ejecutar si la petición es exitosa.
+                if (data.status === 'success') {
+                    // Si el servidor responde con éxito, muestra un mensaje con SweetAlert y redirecciona.
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                    }).then(function () {
+                        window.location.href = "{% url 'ventas1' %}"; // Redirecciona a la lista de tickets.
+                    });
+                }
+            },
+
+            error: function (xhr, errmsg, err) { // Función a ejecutar si hay un error en la petición.
+                if (xhr.status === 400) { // Si el servidor responde con un error 400 (Bad Request).
+                    var errors = JSON.parse(xhr.responseText); // Parsea la respuesta para obtener los errores.
+                    Swal.fire({ // Muestra los errores utilizando SweetAlert.
+                        icon: 'error',
+                        title: errors.message,
+                    });
+                } 
+            }
+        });
+    });
+</script>
+{% endblock %}

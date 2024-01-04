@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Boleta Electrónica</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 10px;
+        }
+        .header img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+        .company-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .boleta-info {
+            border: 2px solid red;
+            text-align: center;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        .boleta-info h2 {
+            margin: 0;
+        }
+        .details-table, .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details-table th, .details-table td,
+        .totals-table th, .totals-table td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+        }
+        .totals-table {
+            margin-top: 20px;
+            float: right;
+            text-align: right;
+            padding: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="media/product_img/logo.jpg" alt="Logo" style="height: 150px; width: 200px;">
+        </div>
+        <div class="boleta-info">
+            <h2>BOLETA ELECTRÓNICA N° {{ documento.venta.id }}</h2>
+            <p>R.U.T. 96.470.430-K</p>
+        </div>
+        <div class="company-info">
+            <p>Los Monitos de la Nona S.A.</p>
+            <p>Artículos escolares, Alimentos y Productos de Bazar</p>
+            <p>R.U.T: 96.470.430-K</p>
+            <p>Oficina 203, Providencia, Santiago</p>
+            <p>Tel: 738 1000. Santiago - Chile</p>
+        </div>
+        <p>Fecha de Emisión: {{ documento.fecha }}</p>
+        <table class="details-table">
+            <thead>
+                <tr>
+                    <th>Sku</th>
+                    <th>DESCRIPCIÓN</th>
+                    <th>CANTIDAD</th>
+                    <th>PRECIO UNIT.</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detalle in documento.detalleCompra.all %}
+                <tr>
+                    <td>{{ detalle.producto.sku }}</td>
+                    <td>{{ detalle.producto.nombre }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>{{ detalle.precio }}</td>
+                    {% if forloop.first %} <!-- Solo en la primera fila -->
+                    <td rowspan="{{ documento.detalleCompra.all|length }}"> <!-- Asegúrate de que el rowspan sea igual al número de detalles -->
+                        {{ documento.precio_total }} <!-- Muestra el total del documento -->
+                    </td>
+                {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="totals-table">
+            <tbody>
+                <tr>
+                    <td>IVA: {{ documento.iva }}</td>
+                </tr>
+                <tr>
+                    <td>Total: {{ documento.precio_total }}</td>
+                </tr>
+                <p>FORMAS DE PAGO: EFECTIVO</p>
+            </tbody>
+        </table>
+        <div class="footer">
+            <img src="media/product_img/TimbreElectronico.jpg" alt="Logo" style="height: 100px; width: 200px;">
+            <p>Timbre Electrónico SII Res. 80 de 2023</p>
+            <p>Verifique este documento: www.sii.cl</p>
+        </div>
+    </div>
+</body>
+</html>

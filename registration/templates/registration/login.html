@@ -1,0 +1,31 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5 pt-5 d-flex flex-column align-items-center justify-content-center">
+    <div class="col-md-6 mx-auto">
+        <h4 class="text-center"><i class="bi bi-person-circle"></i> Bienvenido a Los Monitos de La Nona</h4>
+        <br><hr>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            {% if form.non_field_errors %}
+                <p class="text-danger">Usuario y/o contraseñas incorrectos, intente nuevamente</p>
+            {% endif %}
+            <br><hr>
+            <input type="submit" class="btn btn-secondary mt-2" value="Login">
+            <a href="{% url 'signup' %}" class="btn btn-primary mt-2">Registrarse</a>
+            <a href="#" class="mt-2">¿Olvidaste tu contraseña?, recuperala aqui!</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

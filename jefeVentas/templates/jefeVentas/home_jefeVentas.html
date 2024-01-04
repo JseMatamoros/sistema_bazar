@@ -1,0 +1,86 @@
+{% extends 'jefeVentas/base.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+    #contenedor-imagen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+    background: url("{% static 'img/escritorio.jfif' %}") center/cover no-repeat fixed;
+}
+
+
+#contenedor-imagen::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    background: rgba(10, 10, 10, 0.712);
+    z-index: 1;
+}
+
+#imagen {
+    display: none;
+}
+
+
+.dashboard-container {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.card {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    position: absolute;
+    top: 70%; /* Ajusta este valor según sea necesario para la posición vertical */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    z-index: 4;
+}
+</style>
+<div id="miBloque" class="miBloque">
+    
+        <div class="dashboard-container">
+            <div class="card">
+            <h2>Productos en Inventario</h2><br>
+            <p id="productCount">500</p>
+            </div>
+            <div class="card">
+            <h2>Ventas Mensuales</h2><br>
+            <p id="monthlySales">$50,000</p>
+            </div>
+            <div class="card">
+            <h2>Usuarios Registrados</h2><br>
+            <p id="userCount">200</p>
+            </div>
+        </div>
+        <p>Querido amigo. En "Los Monitos de la Nona", reconocemos y valoramos el esfuerzo constante de nuestros empleados. Cada uno de ustedes aporta una chispa única 
+            a nuestro ambiente, y tu contribución no es la excepción. Estamos emocionados por seguir construyendo juntos esta historia.</p>
+        <div id="contenedor-imagen">
+        
+        <img id="imagen" src="{% static 'img/escritorio.jfif' %}" alt="">
+        </div>
+
+</div>
+{% endblock %}

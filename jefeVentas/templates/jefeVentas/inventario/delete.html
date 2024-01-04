@@ -1,0 +1,23 @@
+{% extends 'jefeVentas/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Confirmar Eliminación</h2>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                ¿Está seguro de que quiere eliminar el producto <strong>{{ i.nombre }}</strong>?
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+                    <a href="{% url 'pagina_inventario' %}" class="btn btn-secondary">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

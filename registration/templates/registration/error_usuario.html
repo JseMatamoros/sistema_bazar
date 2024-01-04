@@ -1,0 +1,13 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<main class="d-flex align-items-center">
+    <div class="container mx-auto text-center">
+        {% load static %}
+        <img src="{% static 'img/OIP.jfif' %}" alt="">
+        <h2>Acceso denegado</h2>
+        <p>No tienes acceso para ver este recurso ¡Vamos a llevarte de vuelta al inicio! <a href="{% url 'login' %}">Inicio</a></p>
+        <p>Hemos informado a tu instructor para que revise este enlace tan pronto como sea posible.</p>
+    </div>
+</main>
+{% endblock %}

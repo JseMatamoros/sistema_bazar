@@ -1,0 +1,50 @@
+{% extends 'jefeVentas/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Crear Caja</h2>
+<h5>Ingrese el monto inicial para abrir la  <strong>Caja</strong></h5>
+<form id="caja-form" method="post" class="col-7 mx-auto">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button class="btn btn-success"  type="submit" >Abrir </button>
+    <a href="{% url 'pagina_principal' %}" class="btn btn-secondary">Volver</a>
+</form>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script><!-- Libreria para añadir JQuery al proyecto. -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script><!-- Libreria para utilizar sweet alert. -->
+<script>
+    // Este script manejará el envío del formulario de manera asíncrona usando AJAX.
+    document.getElementById("caja-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional.
+
+        // Hace una petición AJAX al servidor enviando los datos del formulario serializados.
+        $.ajax({
+            url: "{% url 'crear_caja' %}", // URL a la que se enviará la petición.
+            type: "post", // Método HTTP a usar.
+            data: $(this).serialize(), // Serializa los datos del formulario para enviarlos.
+
+            success: function (data) { // Función a ejecutar si la petición es exitosa.
+                if (data.status === 'success') {
+                    // Si el servidor responde con éxito, muestra un mensaje con SweetAlert y redirecciona.
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                    }).then(function () {
+                        window.location.href = "{% url 'pagina_caja' %}"; // Redirecciona a la lista de tickets.
+                    });
+                }
+            },
+
+            error: function (xhr, errmsg, err) { // Función a ejecutar si hay un error en la petición.
+                if (xhr.status === 400) { // Si el servidor responde con un error 400 (Bad Request).
+                    var errors = JSON.parse(xhr.responseText); // Parsea la respuesta para obtener los errores.
+                    Swal.fire({ // Muestra los errores utilizando SweetAlert.
+                        icon: 'error',
+                        title: errors.message,
+                    });
+                } 
+            }
+        });
+    });
+</script>
+{% endblock %}

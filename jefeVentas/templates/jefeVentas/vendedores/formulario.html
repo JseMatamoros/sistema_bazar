@@ -1,0 +1,22 @@
+{% extends 'jefeVentas/base.html' %}
+
+{% block addvendedor %}
+<div class="container">
+    <div class="card col-7 mx-auto mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">
+                <i class="bi bi-person-hearts"></i>
+                Ingreso de un nuevo Colaborador
+            </h5>
+            <div class="row mt3 col-md-6">
+                <form method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" class="btn btn-warning" value="Update">
+                    <a href="{% url 'pagina_principal' %}" class="btn btn-dark">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

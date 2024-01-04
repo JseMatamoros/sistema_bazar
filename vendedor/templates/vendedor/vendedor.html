@@ -1,0 +1,138 @@
+{% extends 'vendedor/base.html' %}
+{% block encabezado %} Bienvenido a su panel de ventas{% endblock %}
+{% block content %}
+
+<div class="container-fluid custom-container" id="principal">
+    <div class="container-fluid custom-container">
+        <div class="row">
+            <div class="col-md-8 col-12">
+                <!-- Este div está a la izquierda -->
+                <div class="box h-380 w-100 p-3 d-flex flex-column" id="azul">
+                    <div class="row mb-3">
+                        <!-- Primer recuadro -->
+                        <div class="col-md-6">
+                            <a href="{% url 'ventas1' %}" class="card-link">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <!-- Contenido del primer recuadro -->
+                                        <!-- Puedes personalizar el contenido aquí -->
+                                        <h6>Vender!</h6>
+                                        <div style="font-size:80px;">
+                                            <i class="bi bi-cart4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Segundo recuadro -->
+                        <div class="col-md-6">
+                            <a href="#" class="card-link">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <!-- Contenido del primer recuadro -->
+                                        <!-- Puedes personalizar el contenido aquí -->
+                                        <h6>Mis datos personales</h6>
+                                        <div style="font-size:80px;">
+                                            <i class="bi bi-person-add"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <!-- Tercer recuadro -->
+                        <div class="col-md-6">
+                            <a href="https://www.mutual.cl/portal/publico/mutual/inicio/home/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zivRwdzYw83Q183E38DAwCXQMNg_yDPQ3cvA30w8EKDB0NDdyNTQz8_S08XA0CLSyNg9x9QozcQw31o4jRb4ADOBoQpx-Pgij8xofrR4GV4PMBITMKckNDIwwyHQG32pJC/dz/d5/L2dBISEvZ0FBIS9nQSEh/" class="card-link" target="_blank">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <!-- Contenido del primer recuadro -->
+                                        <!-- Puedes personalizar el contenido aquí -->
+                                        <h6>Mis Capacitaciones</h6>
+                                        <div style="font-size:80px;">
+                                            <i class="bi bi-book"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Cuarto recuadro -->
+                        <div class="col-md-6">
+                            <a href="https://adwise.buk.cl/users/sign_in" class="card-link">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <!-- Contenido del primer recuadro -->
+                                        <!-- Puedes personalizar el contenido aquí -->
+                                        <h6>Mis Contratos y Anexos.</h6>
+                                        <div style="font-size:80px;">
+                                            <i class="bi bi-file-earmark-medical"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <!-- Quinto recuadro -->
+                        <div class="col-md-6">
+                            <a href="{% url 'ventas1' %}" class="card-link">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <!-- Contenido del primer recuadro -->
+                                        <!-- Puedes personalizar el contenido aquí -->
+                                        <h6>Sindicato Nonitos</h6>
+                                        <div style="font-size:80px;">
+                                            <i class="bi bi-people-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Sexto recuadro -->
+                        <div class="col-md-6">
+                            <a href="{% url 'ventas1' %}" class="card-link">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <!-- Contenido del primer recuadro -->
+                                        <!-- Puedes personalizar el contenido aquí -->
+                                        <h6>Liquidaciones</h6>
+                                        <div style="font-size:80px;">
+                                            <i class="bi bi-file-earmark-medical-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Este div está debajo del primero en la izquierda -->
+                <div class="box h-380 w-100 p-1 d-flex flex-column" id="rojo">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Contenido del cuadro debajo del primero en la izquierda -->
+                            <h5 class="card-title"><i class="bi bi-building-fill-check"></i> Explora La Nona</h5>
+                            <ul>
+                                <li class="list-group-item"><i class="bi bi-building-fill-check"></i> Novedades</li>
+                                <li class="list-group-item"><i class="bi bi-person-lines-fill"></i> Contacto administración: 555-555-555</li>
+                                <li class="list-group-item"><i class="bi bi-shop-window"></i> Nuestra Familia Nona</li>
+                                <li class="list-group-item"><i class="bi bi-envelope-at-fill"></i> Outlook</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <!-- Este div está a la derecha -->
+                <div class="box h-100 w-40" id="verde">
+                    {% include 'vendedor/ventas_vendedor.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

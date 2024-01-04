@@ -1,0 +1,34 @@
+{% extends 'jefeVentas/base.html' %}
+
+{% block content %}
+  {% if cajas %}
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Detalle de Caja</h2>
+        </div>
+        <div class="card-body">
+          <dl class="row">
+            <dt class="col-sm-3"><b>ID:</b></dt>
+            <dd class="col-sm-9">{{ cajas.id }}</dd>
+
+            <dt class="col-sm-3"><b>Fecha creacion:</b></dt>
+            <dd class="col-sm-9">{{ cajas.fecha_creacion }}</dd>
+
+            <dt class="col-sm-3"><b>Jefe ventas:</b></dt>
+            <dd class="col-sm-9">{{ cajas.jefeVentas }}</dd>
+
+            <dt class="col-sm-3"><b>Estado:</b></dt>
+            <dd class="col-sm-9">{{ cajas.estado }}</dd>
+
+            <dt class="col-sm-3"><b>Fecha termino:</b></dt>
+            <dd class="col-sm-9">{{ cajas.fecha_termino }}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="d-grid gap-2">
+    <a href="{% url 'pagina_caja' %}" class="btn btn-secondary">Volver</a>
+</div>
+{% endblock %}

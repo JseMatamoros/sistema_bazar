@@ -1,0 +1,23 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card col-7 mx-auto mb-4 bg-black">
+        <div class="card-body">
+            <h2 class="text-center"><i class="bi bi-person-bounding-box"></i> Creacion cuenta</h2>
+            <div class="row mt-3 d-flex">
+                <form id="signup-form" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <p>
+                        <input type="submit" class="btn btn-success" value="Create">
+                        <a href="{% url 'login' %}" class="btn btn-dark">Back</a>
+                    </p>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

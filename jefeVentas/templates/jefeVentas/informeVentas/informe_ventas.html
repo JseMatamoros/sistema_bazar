@@ -1,0 +1,66 @@
+{% extends 'jefeVentas/base.html' %}
+
+{% block content %}
+
+<style>
+    /* Estilos para el contenedor de la tabla, con espacio adicional en el fondo */
+    .table-responsive {
+        margin-bottom: 80px; /* Espacio extra para evitar que la tabla toque el footer */
+        overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
+        /* Ajusta la altura máxima según tus necesidades o la altura del viewport */
+        max-height: 75vh;   
+    }
+</style>
+
+
+<div class="container mt-4">
+    {% include 'jefeVentas/informeVentas/informe_filtro.html' %}
+
+    {% if filtro_aplicado %}
+    <h1>Informe de Ventas</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th>Fecha</th>
+                    <th>Vendedor</th>
+                    <th>Cliente</th>
+                    <!--<th>Producto y Cantidad</th>-->
+                    <!--<th>Subtotal</th>-->
+                    <!--<th>IVA</th>-->
+                    <th>Total</th>
+                    <th>Tipo de Documento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.id }}</td>
+                    <td>{{ venta.fecha }}</td>
+                    <td>{{ venta.vendedor.name }} {{ venta.vendedor.last_name }}</td>
+                    <td>{{ venta.cliente }}</td>
+                    <td>{{ venta.precio_total }}</td>
+                    <td>
+                        {% for documento in venta.documentotributario_set.all %}
+                            <br>
+                            {% if documento.tipo.nombre == "Factura" %}
+                                <a href="{% url 'factura_pdf' documento.id %}" class="btn btn-primary">Descargar Factura</a>
+                            {% elif documento.tipo.nombre == "Boleta" %}
+                                <a href="{% url 'boleta_pdf' documento.id %}" class="btn btn-primary">Descargar Boleta</a>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8">No hay ventas para mostrar.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
